@@ -1,0 +1,97 @@
+Variante	Alcance	            Vida útil	    Inicialización	        Comentario clave
+1	        Local a foo	        Durante foo	        No	                Valor basura
+2	        Local a foo	        Durante foo	        Sí (cada llamada)	Se reinicializa cada vez
+3	        Global	            Todo el programa	Automática (0)	    Compartida entre funciones del archivo
+4	        Local a foo	        Todo el programa	Una vez	            Persiste entre llamadas a foo
+5	        Global (externa)	Todo el programa	En otro archivo	    Accede a una variable definida en otro archivo
+6	        Global (estática)	Todo el programa	Una vez	            Solo accesible dentro del mismo archivo fuente
+
+1.
+int foo() {
+    int numero;
+}
+Tipo: Variable local automática (auto por defecto).
+
+Alcance (scope): Local a la función foo.
+
+Tiempo de vida: Solo mientras se ejecuta foo.
+
+Inicialización: No está inicializada, contiene un valor basura.
+
+Comentario: Usarla sin inicializar puede causar comportamiento indefinido.
+
+2.
+int foo() {
+    int numero = 21;
+}
+Tipo: Variable local automática.
+
+Alcance: Local a la función foo.
+
+Tiempo de vida: Solo durante la ejecución de foo.
+
+Inicialización: Sí, se inicializa con 21 cada vez que se llama foo.
+
+Comentario: La variable se destruye al salir de foo.
+
+3.
+int numero;
+int foo() {
+    numero = 21;
+}
+Tipo: Variable global.
+
+Alcance: Desde el punto de definición hasta el final del archivo.
+
+Tiempo de vida: Durante toda la ejecución del programa.
+
+Inicialización: Se inicializa automáticamente a 0 si no se le da un valor.
+
+Comentario: Accesible desde cualquier función del mismo archivo (o de otros si se declara con extern).
+
+4.
+int foo() {
+    static int numero = 21;
+}
+Tipo: Variable local estática.
+
+Alcance: Local a la función foo.
+
+Tiempo de vida: Durante toda la ejecución del programa.
+
+Inicialización: Solo la primera vez que se ejecuta foo.
+
+Comentario: Conserva su valor entre llamadas a la función.
+
+5.
+extern int numero;
+int foo() {
+    numero = 10;
+}
+
+// En otro archivo:
+int numero = 21;
+Tipo: Variable global externa.
+
+Alcance: Toda la aplicación (si se vincula correctamente).
+
+Tiempo de vida: Todo el tiempo de ejecución.
+
+Inicialización: En el archivo donde se define (no donde se declara con extern).
+
+Comentario: extern declara la existencia de la variable, pero no la define ni inicializa.
+
+6.
+static int numero = 10;
+int foo() {
+    numero = 20;
+}
+Tipo: Variable global estática.
+
+Alcance: Solo visible dentro del archivo donde se define.
+
+Tiempo de vida: Todo el tiempo de ejecución.
+
+Inicialización: Una vez, antes de que comience la ejecución del programa.
+
+Comentario: Útil para evitar conflictos de nombres con otros archivos fuente.

@@ -1,0 +1,17 @@
+docker container list   ---->   Muestra archivos y contenedores activos en docker
+docker container list -a  ----> Mostrar activos e inactivos
+docker exec -it <DIR_NAME> bash  ---->  ingresa a una terminal interactiva "tipo Linux" dentro del servidor de docker
+
+PERMISOS DE IMAGEN:
+(dentro del contendor de docker) groupadd -g 1000 -o jglaubart
+useradd -m -u 1000 -g 1000 -o -s /bin/bash <USRNAME>
+
+USAR CONTENEDOR DESDE USUARIO: docker exec -u <USRNAME> -it <DIR_NAME> /bin/bash
+
+ps aux ----> ver procesos corriendo
+exit  ---->  Salir de la terminal y regresar a la de ubuntu
+
+docker stop <DIR_NAME>  ---->  frenar la ejecucion
+docker rm <DIR_NAME>  ----> eliminar el directorio creado
+
+Al volver a prender la computadora, ejecutar docker start -ai TP5 para que se corra nuevamente.

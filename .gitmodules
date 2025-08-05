@@ -1,0 +1,3 @@
+[submodule "TPE_Arqui"]
+	path = TPE_Arqui
+	url = https://github.com/eugemigliaro/TPE_Arqui.git
